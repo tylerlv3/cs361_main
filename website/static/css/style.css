@@ -1,0 +1,19 @@
+/* Custom styles for your Flask application */
+
+body {
+    font-family: 'Arial', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1;
+}
+
+/* Example of custom styling */
+.navbar-brand {
+    font-weight: bold;
+}
+
+/* Add more custom CSS as needed */

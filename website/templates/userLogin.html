@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="display-4">Sign In</h1>
+    </div> 
+</div>
+<div class="row">
+    <form method="POST" action="{{ url_for('views.checkUser') }}">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Log in</button>
+
+</div>
+{%endblock%}
