@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Orders{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="display-4">Your Orders</h1>
+        <p class="lead">Track and manage your orders here</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <!-- Orders content will go here -->
+        <div class="card mb-3">
+            <div class="card-header">
+                Order #12345
+            </div>
+            <div class="card-body">
+                <p class="card-text"><strong>Date:</strong> May 1, 2025</p>
+                <p class="card-text"><strong>Status:</strong> <span class="badge bg-success">Delivered</span></p>
+                <p class="card-text"><strong>Items:</strong> 3</p>
+                <p class="card-text"><strong>Total:</strong> $45.99</p>
+                <button class="btn btn-sm btn-primary">View Details</button>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header">
+                Order #12346
+            </div>
+            <div class="card-body">
+                <p class="card-text"><strong>Date:</strong> May 2, 2025</p>
+                <p class="card-text"><strong>Status:</strong> <span class="badge bg-warning text-dark">Shipping</span></p>
+                <p class="card-text"><strong>Items:</strong> 2</p>
+                <p class="card-text"><strong>Total:</strong> $29.95</p>
+                <button class="btn btn-sm btn-primary">View Details</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

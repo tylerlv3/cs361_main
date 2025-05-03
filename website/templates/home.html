@@ -4,9 +4,166 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-12">
-        <h1 class="display-4">do something here</h1>
-        <p class="lead">item cards gonna go somewhere here</p>
+    <!-- Filtering Options Sidebar -->
+    <div class="col-md-3 mb-4">
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">Filter Products</h5>
+            </div>
+            <div class="card-body">
+                <form id="filterForm">
+                    <!-- Category Filter -->
+                    <div class="mb-4">
+                        <h6 class="fw-bold">Categories</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="category1">
+                            <label class="form-check-label" for="category1">
+                                Electronics
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="category2">
+                            <label class="form-check-label" for="category2">
+                                Clothing
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="category3">
+                            <label class="form-check-label" for="category3">
+                                Home & Kitchen
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="category4">
+                            <label class="form-check-label" for="category4">
+                                Books
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="category5">
+                            <label class="form-check-label" for="category5">
+                                Sports & Outdoors
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Price Range Filter -->
+                    <div class="mb-4">
+                        <h6 class="fw-bold">Price Range</h6>
+                        <div class="d-flex align-items-center">
+                            <div class="input-group input-group-sm mb-2">
+                                <span class="input-group-text">$</span>
+                                <input type="number" class="form-control" placeholder="Min" min="0" name="minPrice">
+                            </div>
+                            <span class="mx-2">-</span>
+                            <div class="input-group input-group-sm mb-2">
+                                <span class="input-group-text">$</span>
+                                <input type="number" class="form-control" placeholder="Max" min="0" name="maxPrice">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ratings Filter -->
+                    <div class="mb-4">
+                        <h6 class="fw-bold">Rating</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="rating4plus">
+                            <label class="form-check-label" for="rating4plus">
+                                4★ & above
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="rating3plus">
+                            <label class="form-check-label" for="rating3plus">
+                                3★ & above
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="rating2plus">
+                            <label class="form-check-label" for="rating2plus">
+                                2★ & above
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Options -->
+                    <div class="mb-4">
+                        <h6 class="fw-bold">Shipping</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="freeShipping">
+                            <label class="form-check-label" for="freeShipping">
+                                Free Shipping
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="sameDay">
+                            <label class="form-check-label" for="sameDay">
+                                Same Day Delivery
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Apply Filters</button>
+                        <button type="reset" class="btn btn-outline-danger">Reset Filters</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="col-md-9">
+        <h1 class="display-5 mb-4">Browse</h1>
+        
+        <!-- Example Product Grid -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <!-- This is just a placeholder for product cards -->
+            {% for i in range(6) %}
+            <div class="col">
+                <div class="card h-100">
+                    <div class="bg-light d-flex justify-content-center align-items-center" style="height: 200px;">
+                        <span class="text-muted">Product Image</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Example Product {{ i + 1 }}</h5>
+                        <p class="card-text text-muted">Brief product description goes here.</p>
+                        <p class="card-text fw-bold">$24.99</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button class="btn btn-sm btn-primary">Add to Cart</button>
+                            <div>
+                                <small class="text-warning">★★★★☆</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle filter form submission
+        const filterForm = document.getElementById('filterForm');
+        if (filterForm) {
+            filterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Here you would collect all the filter values and submit them
+                console.log('Applying filters...');
+                
+                // Form data collection example
+                const formData = new FormData(filterForm);
+                const filters = Object.fromEntries(formData.entries());
+                console.log('Filter values:', filters);
+                
+                // You would typically make an AJAX request here or redirect with query params
+            });
+        }
+    });
+</script>
 {% endblock %}
