@@ -117,7 +117,7 @@
     <div class="col-md-9">
         <h1 class="display-5 mb-4">Browse</h1>
         
-        <!-- Example Product Grid -->
+
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             <!-- This is just a placeholder for product cards -->
             {% for i in range(6) %}
@@ -146,23 +146,53 @@
 {% endblock %}
 
 {% block scripts %}
+{{ super() }} {# Optional: Include scripts from base.html if needed #}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Handle filter form submission
+
         const filterForm = document.getElementById('filterForm');
         if (filterForm) {
             filterForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                // Here you would collect all the filter values and submit them
+                
                 console.log('Applying filters...');
                 
-                // Form data collection example
+
                 const formData = new FormData(filterForm);
                 const filters = Object.fromEntries(formData.entries());
                 console.log('Filter values:', filters);
                 
-                // You would typically make an AJAX request here or redirect with query params
             });
+        }
+
+        const signInButton = document.getElementById('signInBtn');
+        if (signInButton) {
+            // Initialize the popover
+            const popover = new bootstrap.Popover(signInButton, {
+                html: true, 
+                sanitize: false
+            });
+
+            if (!localStorage.getItem('signInPopoverDismissed')) {
+                popover.show();
+            }
+            document.addEventListener('click', function(event) {
+            
+                const popoverElement = document.querySelector('.popover.signin-popover'); 
+                if (popoverElement && !signInButton.contains(event.target) && !popoverElement.contains(event.target)) {
+                    popover.hide();
+                    //localStorage.setItem('signInPopoverDismissed', 'true');
+                }
+            });
+
+            
+             signInButton.addEventListener('click', function() {
+                 if (document.querySelector('.popover.signin-popover')) {
+                     popover.hide();
+                     localStorage.setItem('signInPopoverDismissed', 'true');
+                 }
+
+             });
         }
     });
 </script>

@@ -35,7 +35,7 @@
 {% block scripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Get references to form elements
+
         const form = document.getElementById('registrationForm');
         const password = document.getElementById('password');
         const confirmPassword = document.getElementById('confirm_password');
@@ -57,7 +57,7 @@
             }
         }
         
-        // Add event listeners for real-time validation
+
         confirmPassword.addEventListener('input', checkPasswordsMatch);
         password.addEventListener('input', function() {
             if (confirmPassword.value.length > 0) {

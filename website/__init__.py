@@ -11,12 +11,12 @@ def create_app():
     app = Flask(__name__)
 
 
-    # Import routes
+
     from .views import views
     
-    # Register blueprints
+
     app.register_blueprint(views, url_prefix='/')
-    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')  # Required for flash messages
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
         
     return app
 

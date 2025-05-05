@@ -73,7 +73,6 @@
                     <div class="card-header">Notification Preferences</div>
                     <div class="card-body">
                         <p>Manage how you receive notifications.</p>
-                        <!-- Notification preferences would go here -->
                     </div>
                 </div>
             </div>
@@ -83,7 +82,6 @@
                     <div class="card-header">Privacy Settings</div>
                     <div class="card-body">
                         <p>Control your privacy settings and data sharing preferences.</p>
-                        <!-- Privacy settings would go here -->
                     </div>
                 </div>
             </div>
@@ -100,10 +98,10 @@
             triggerEl.addEventListener('click', function(event) {
                 event.preventDefault();
                 
-                // Remove active class from all tabs
+
                 triggerTabList.forEach(tab => tab.classList.remove('active'));
                 
-                // Add active class to clicked tab
+
                 this.classList.add('active');
             });
         });

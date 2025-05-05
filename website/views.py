@@ -27,7 +27,6 @@ def checkUser():
         # Get email from form
         email = request.form.get('email')
         
-        # Check if the user service URL is set
         service_url = os.getenv('USER_CONTROL_SERVICE_URL')
         if not service_url:
             flash('User control service URL is not set', 'error')
@@ -51,7 +50,6 @@ def checkUser():
             flash(f'Error checking user: {str(e)}', 'error')
             return redirect(url_for('views.home'))
     
-    # GET request - show the initial form
     return render_template('userInit.html')
 
 @views.route('/login', methods=['GET', 'POST'])
@@ -61,14 +59,14 @@ def userLogin():
         email = request.form.get('email')
         password = request.form.get('password')
         
-        # Here you would validate credentials with your user service
+
         service_url = os.getenv('USER_CONTROL_SERVICE_URL')
         if not service_url:
             flash('User control service URL is not set', 'error')
             return redirect(url_for('views.home'))
         
         try:
-            # This endpoint would need to exist in your user service
+
             response = requests.post(f'{service_url}/login', 
                                     json={'email': email, 'password': password})
             
@@ -83,7 +81,7 @@ def userLogin():
             flash(f'Error during login: {str(e)}', 'error')
             return render_template('userLogin.html', email=email)
             
-    # GET request - show the login form, possibly with pre-filled email
+
     email = request.args.get('email', '')
     return render_template('userLogin.html', email=email)
 
@@ -94,7 +92,7 @@ def userRegister():
         email = request.form.get('email')
         password = request.form.get('password')
         
-        # Here you would register the user with your user service
+
         service_url = os.getenv('USER_CONTROL_SERVICE_URL')
         if not service_url:
             flash('User control service URL is not set', 'error')
@@ -115,7 +113,7 @@ def userRegister():
             flash(f'Error during registration: {str(e)}', 'error')
             return render_template('userRegister.html', email=email)
 
-    # GET request - show the registration form, possibly with pre-filled email
+
     email = request.args.get('email', '')
     return render_template('userRegister.html', email=email)
 

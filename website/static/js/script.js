@@ -1,15 +1,18 @@
-// Custom JavaScript for your Flask application
 
-// Document ready function
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM fully loaded and parsed');
-    
-    // Add your JavaScript functionality here
-    
-    // Example: Add a click event to all buttons with the 'btn' class
-    const buttons = document.querySelectorAll('.btn');
+
+    const signInButton = document.getElementById('signInBtn');
+    if (signInButton) {
+        const popover = new bootstrap.Popover(signInButton);
+        popover.show();
+
+    }
+
+    const buttons = document.querySelectorAll('.btn:not(#signInBtn)');
     buttons.forEach(button => {
         button.addEventListener('click', function(e) {
+
             console.log('Button clicked:', this.textContent);
         });
     });
