@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify
 import os
 import requests
 
@@ -112,6 +112,41 @@ def userRegister():
         except Exception as e:
             flash(f'Error during registration: {str(e)}', 'error')
             return render_template('userRegister.html', email=email)
+
+@views.route('/metadata/<int:fileID>', methods=['POST', 'GET'])
+def forwardMetadata(fileID):
+    service_url = os.getenv('META_SERVICE_URL')
+    if not service_url:
+        flash('Metadata service URL is not set', 'error')
+        return redirect(url_for('views.home'))
+    try:
+        if request.method == 'POST':
+            data = request.get_json()
+            if not data or 'metadata' not in data:
+                return jsonify({"error": "Data or metadata Missing"}), 400
+            response = requests.post(f'{service_url}/metadata/{fileID}', json=data)
+            return jsonify(response.json()), response.status_code
+        elif request.method == 'GET':
+            response = requests.get(f'{service_url}/metadata/{fileID}')
+            return jsonify(response.json()), response.status_code
+        else:
+            return jsonify({"error": "Method not allowed"}), 405
+    except requests.exceptions.ConnectionError:
+        response_data = {"error": "Failed to connect to the metadata microservice"}
+        status_code = 503 # Service Unavailable
+    except requests.exceptions.Timeout:
+        response_data = {"error": "Request to the metadata microservice timed out"}
+        status_code = 504 # Gateway Timeout
+    except requests.exceptions.RequestException as e:
+        # Catch other general request exceptions
+        response_data = {"error": f"Error communicating with metadata microservice: {str(e)}"}
+        status_code = 500
+    except ValueError: # If res.json() fails to parse (e.g., microservice returned non-JSON)
+            response_data = {"error": "Invalid JSON response from metadata microservice"}
+            # Keep status_code from the microservice if available
+            status_code = res.status_code if 'res' in locals() and res.status_code >= 400 else 502 # Bad Gateway
+
+    return jsonify(response_data), status_code
 
 
     email = request.args.get('email', '')
