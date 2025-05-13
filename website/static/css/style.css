@@ -1,17 +1,107 @@
+/* Earthy color palette variables */
+:root {
+    --color-bg: #f5f3ea; /* light tan */
+    --color-bg-alt: #e0dbce; /* lighter tan */
+    --color-text: #3e3a36; /* deep gray-brown */
+    --color-accent: #8d775f; /* muted brown */
+    --color-accent2: #b7a99a; /* soft gray-tan */
+    --color-success: #6b8e6e; /* muted green */
+    --color-border: #d1c7b7;
+}
 
+[data-bs-theme="dark"] {
+    --color-bg: #2d2a26; /* dark brown-gray */
+    --color-bg-alt: #3e3a36; /* deep gray-brown */
+    --color-text: #f5f3ea; /* light tan */
+    --color-accent: #b7a99a; /* soft gray-tan */
+    --color-accent2: #8d775f; /* muted brown */
+    --color-success: #6b8e6e; /* muted green */
+    --color-border: #4a463f;
+}
 
 body {
     font-family: 'Arial', sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background: var(--color-bg);
+    color: var(--color-text);
+    transition: background 0.3s, color 0.3s;
 }
 
 .container {
     flex: 1;
 }
 
+.navbar, .offcanvas, .footer, .card-header {
+    background: var(--color-bg-alt) !important;
+    color: var(--color-text) !important;
+    border-bottom: 1px solid var(--color-border);
+}
+
 .navbar-brand {
     font-weight: bold;
+    color: var(--color-accent) !important;
+}
+
+.btn-primary, .btn-outline-secondary {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    border: none;
+    transition: background 0.3s, color 0.3s;
+}
+
+.btn-primary:hover, .btn-outline-secondary:hover {
+    background: var(--color-success);
+    color: var(--color-bg);
+}
+
+.card {
+    background: var(--color-bg-alt);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.form-control {
+    background: var(--color-bg);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.form-control:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 0.2rem var(--color-accent2);
+}
+
+.alert-success {
+    background: var(--color-success);
+    color: var(--color-bg);
+    border: none;
+}
+
+a, .nav-link {
+    color: var(--color-accent);
+    transition: color 0.3s;
+}
+
+a:hover, .nav-link:hover {
+    color: var(--color-success);
+}
+
+footer {
+    background: var(--color-bg-alt);
+    color: var(--color-accent2);
+    border-top: 1px solid var(--color-border);
+}
+
+.card .card-img-top,
+.card .bg-light.d-flex {
+    border-top-left-radius: 12px !important;
+    border-top-right-radius: 12px !important;
+    overflow: hidden;
 }
 

@@ -3,18 +3,24 @@
 {% block title %}Welcome{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-12">
-        <h1 class="display-4">Sign In or Create Account</h1>
-    </div> 
-</div>
-<div class="row">
-    <form method="POST" action="{{ url_for('views.checkUser') }}">
-        <div class="mb-3">
-            <label for="email" class="form-label">Email:</label>
-            <input type="email" class="form-control" id="email" name="email" required>
+<div class="d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="card shadow-lg p-4" style="max-width: 420px; width: 100%; background: var(--color-bg-alt); border-radius: 18px; border: 1px solid var(--color-border);">
+        <div class="text-center mb-3">
+            <i class="fas fa-user-circle fa-3x mb-2" style="color: var(--color-accent);"></i>
+            <h2 class="fw-bold mb-1" style="color: var(--color-accent)">Sign In or Create Account</h2>
+            <p class="lead" style="color: var(--color-text)">Enter your email below. If you have an account, you can log in. Otherwise, you'll be guided to create a new account.</p>
         </div>
-        <button type="submit" class="btn btn-primary">Continue</button>
-
+        <form method="POST" action="{{ url_for('views.checkUser') }}">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.email.label(class="form-label") }}
+                {{ form.email(class="form-control", autofocus=True) }}
+                {% for error in form.email.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+            {{ form.submit(class="btn btn-primary w-100") }}
+        </form>
+    </div>
 </div>
-{%endblock%}
+{% endblock %}

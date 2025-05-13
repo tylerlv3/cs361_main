@@ -1,0 +1,262 @@
+[
+  {
+    "id": 1,
+    "title": "Awesome T-Shirt",
+    "price": 19.99,
+    "description": "A comfortable and stylish t-shirt made from 100% cotton.",
+    "category": "Clothing",
+    "rating": 4,
+    "freeShipping": true,
+    "sameDayDelivery": false
+  },
+  {
+    "id": 2,
+    "title": "Wireless Headphones",
+    "price": 79.99,
+    "description": "High-fidelity wireless headphones with noise-cancellation.",
+    "category": "Electronics",
+    "rating": 5,
+    "freeShipping": true,
+    "sameDayDelivery": true
+  },
+  {
+    "id": 3,
+    "title": "Coffee Mug",
+    "price": 12.50,
+    "description": "A large ceramic mug, perfect for your morning coffee or tea.",
+    "category": "HomeKitchen",
+    "rating": 4,
+    "freeShipping": false,
+    "sameDayDelivery": false
+  },
+  {
+    "id": 4,
+    "title": "Laptop Stand",
+    "price": 29.95,
+    "description": "Ergonomic aluminum laptop stand to improve your posture.",
+    "category": "Electronics",
+    "rating": 4,
+    "freeShipping": true,
+    "sameDayDelivery": false
+  },
+  {
+    "id": 5,
+    "title": "Yoga Mat",
+    "price": 25.00,
+    "description": "Eco-friendly, non-slip yoga mat for your daily practice.",
+    "category": "SportsOutdoors",
+    "rating": 5,
+    "freeShipping": false,
+    "sameDayDelivery": true
+  },
+  {
+    "id": 6,
+    "title": "Reusable Water Bottle",
+    "price": 15.75,
+    "description": "Stay hydrated with this durable and stylish reusable water bottle.",
+    "category": "SportsOutdoors",
+    "rating": 4,
+    "freeShipping": true,
+    "sameDayDelivery": true
+  },
+  {
+    "id": 7,
+    "title": "Classic Novel",
+    "price": 9.99,
+    "description": "A timeless piece of literature that everyone should read.",
+    "category": "Books",
+    "rating": 5,
+    "freeShipping": false,
+    "sameDayDelivery": false
+  },
+  {
+    "id": 8,
+    "title": "Smartwatch",
+    "price": 199.50,
+    "description": "Track your fitness and stay connected with this sleek smartwatch.",
+    "category": "Electronics",
+    "rating": 4,
+    "freeShipping": true,
+    "sameDayDelivery": true
+  },
+  {
+    "id": 9,
+    "title": "Blender",
+    "price": 45.00,
+    "description": "Powerful blender for smoothies, shakes, and more.",
+    "category": "HomeKitchen",
+    "rating": 4,
+    "freeShipping": true,
+    "sameDayDelivery": false
+  },
+  {
+    "id": 10,
+    "title": "Running Shoes",
+    "price": 89.99,
+    "description": "Lightweight and comfortable running shoes for all terrains.",
+    "category": "SportsOutdoors",
+    "rating": 5,
+    "freeShipping": false,
+    "sameDayDelivery": false
+  },
+  {
+    "id": 11,
+    "title": "Desk Lamp",
+    "price": 22.00,
+    "description": "Adjustable LED desk lamp with multiple brightness settings.",
+    "category": "HomeKitchen",
+    "rating": 3,
+    "freeShipping": true,
+    "sameDayDelivery": false
+  },
+  {
+    "id": 12,
+    "title": "Graphic T-Shirt",
+    "price": 24.99,
+    "description": "Unique graphic design on a soft cotton t-shirt.",
+    "category": "Clothing",
+    "rating": 4,
+    "freeShipping": false,
+    "sameDayDelivery": true
+  },
+  {
+    "id": 13,
+    "title": "Bluetooth Speaker",
+    "price": 35.50,
+    "description": "Portable Bluetooth speaker with rich sound quality.",
+    "category": "Electronics",
+    "rating": 4,
+    "freeShipping": true,
+    "sameDayDelivery": false
+  },
+  {
+    "id": 14,
+    "title": "Cookbook",
+    "price": 18.75,
+    "description": "A collection of delicious and easy-to-follow recipes.",
+    "category": "Books",
+    "rating": 4,
+    "freeShipping": false,
+    "sameDayDelivery": false
+  },
+  {
+    "id": 15,
+    "title": "Dumbbell Set",
+    "price": 55.00,
+    "description": "Set of adjustable dumbbells for a home workout.",
+    "category": "SportsOutdoors",
+    "rating": 4,
+    "freeShipping": true,
+    "sameDayDelivery": false
+  },
+  {
+    "id": 16,
+    "title": "Scented Candle",
+    "price": 14.99,
+    "description": "Relaxing scented candle with a long burn time.",
+    "category": "HomeKitchen",
+    "rating": 3,
+    "freeShipping": false,
+    "sameDayDelivery": true
+  },
+  {
+    "id": 17,
+    "title": "Gaming Mouse",
+    "price": 49.99,
+    "description": "Ergonomic gaming mouse with customizable buttons.",
+    "category": "Electronics",
+    "rating": 5,
+    "freeShipping": true,
+    "sameDayDelivery": false
+  },
+  {
+    "id": 18,
+    "title": "Winter Scarf",
+    "price": 19.50,
+    "description": "Warm and stylish scarf for cold weather.",
+    "category": "Clothing",
+    "rating": 4,
+    "freeShipping": false,
+    "sameDayDelivery": false
+  },
+  {
+    "id": 19,
+    "title": "Backpack",
+    "price": 39.99,
+    "description": "Durable and spacious backpack for daily use or travel.",
+    "category": "SportsOutdoors",
+    "rating": 4,
+    "freeShipping": true,
+    "sameDayDelivery": true
+  },
+  {
+    "id": 20,
+    "title": "Wall Art Print",
+    "price": 29.00,
+    "description": "Modern art print to decorate your living space.",
+    "category": "HomeKitchen",
+    "rating": 4,
+    "freeShipping": false,
+    "sameDayDelivery": false
+  },
+  {
+    "id": 21,
+    "title": "Children's Story Book",
+    "price": 7.99,
+    "description": "A beautifully illustrated story book for young readers.",
+    "category": "Books",
+    "rating": 5,
+    "freeShipping": false,
+    "sameDayDelivery": false
+  },
+  {
+    "id": 22,
+    "title": "External Hard Drive",
+    "price": 65.00,
+    "description": "1TB external hard drive for backups and storage.",
+    "category": "Electronics",
+    "rating": 4,
+    "freeShipping": true,
+    "sameDayDelivery": false
+  },
+  {
+    "id": 23,
+    "title": "Kitchen Knife Set",
+    "price": 75.50,
+    "description": "Professional quality kitchen knife set with block.",
+    "category": "HomeKitchen",
+    "rating": 5,
+    "freeShipping": true,
+    "sameDayDelivery": false
+  },
+  {
+    "id": 24,
+    "title": "Resistance Bands",
+    "price": 16.99,
+    "description": "Set of 5 resistance bands for fitness and therapy.",
+    "category": "SportsOutdoors",
+    "rating": 4,
+    "freeShipping": false,
+    "sameDayDelivery": true
+  },
+  {
+    "id": 25,
+    "title": "Sun Hat",
+    "price": 21.00,
+    "description": "Wide-brimmed sun hat for UV protection.",
+    "category": "Clothing",
+    "rating": 4,
+    "freeShipping": false,
+    "sameDayDelivery": false
+  },
+  {
+    "id": 26,
+    "title": "Keyboard and Mouse Combo",
+    "price": 42.75,
+    "description": "Wireless keyboard and mouse combo for comfortable typing.",
+    "category": "Electronics",
+    "rating": 3,
+    "freeShipping": true,
+    "sameDayDelivery": true
+  }
+]

@@ -16,31 +16,31 @@
                     <div class="mb-4">
                         <h6 class="fw-bold">Categories</h6>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="category1">
+                            <input class="form-check-input" type="checkbox" value="Electronics" id="category1" name="category">
                             <label class="form-check-label" for="category1">
                                 Electronics
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="category2">
+                            <input class="form-check-input" type="checkbox" value="Clothing" id="category2" name="category">
                             <label class="form-check-label" for="category2">
                                 Clothing
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="category3">
+                            <input class="form-check-input" type="checkbox" value="HomeKitchen" id="category3" name="category">
                             <label class="form-check-label" for="category3">
                                 Home & Kitchen
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="category4">
+                            <input class="form-check-input" type="checkbox" value="Books" id="category4" name="category">
                             <label class="form-check-label" for="category4">
                                 Books
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="category5">
+                            <input class="form-check-input" type="checkbox" value="SportsOutdoors" id="category5" name="category">
                             <label class="form-check-label" for="category5">
                                 Sports & Outdoors
                             </label>
@@ -67,21 +67,27 @@
                     <div class="mb-4">
                         <h6 class="fw-bold">Rating</h6>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="rating4plus">
+                            <input class="form-check-input" type="radio" value="4" id="rating4plus" name="minRating">
                             <label class="form-check-label" for="rating4plus">
                                 4★ & above
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="rating3plus">
+                            <input class="form-check-input" type="radio" value="3" id="rating3plus" name="minRating">
                             <label class="form-check-label" for="rating3plus">
                                 3★ & above
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="rating2plus">
+                            <input class="form-check-input" type="radio" value="2" id="rating2plus" name="minRating">
                             <label class="form-check-label" for="rating2plus">
                                 2★ & above
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="0" id="ratingAny" name="minRating" checked>
+                            <label class="form-check-label" for="ratingAny">
+                                Any Rating
                             </label>
                         </div>
                     </div>
@@ -90,13 +96,13 @@
                     <div class="mb-4">
                         <h6 class="fw-bold">Shipping</h6>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="freeShipping">
+                            <input class="form-check-input" type="checkbox" value="true" id="freeShipping" name="freeShipping">
                             <label class="form-check-label" for="freeShipping">
                                 Free Shipping
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="sameDay">
+                            <input class="form-check-input" type="checkbox" value="true" id="sameDay" name="sameDayDelivery">
                             <label class="form-check-label" for="sameDay">
                                 Same Day Delivery
                             </label>
@@ -117,83 +123,199 @@
     <div class="col-md-9">
         <h1 class="display-5 mb-4">Browse</h1>
         
-
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            <!-- This is just a placeholder for product cards -->
-            {% for i in range(6) %}
-            <div class="col">
-                <div class="card h-100">
+        <!-- Products area -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="productList">
+            {% if products %}
+            {% for product in products %}
+            <div class="col product-item"
+                 id="{{ product.id }}"
+                 data-price="{{ product.price }}"
+                 data-category="{{ product.category | default('', true) }}"
+                 data-rating="{{ product.rating | default(0, true) }}"
+                 data-free-shipping="{{ 'true' if product.freeShipping else 'false' }}"
+                 data-same-day="{{ 'true' if product.sameDayDelivery else 'false' }}">
+                <a href="{{ url_for('views.product', productID=product.id) }}" class="text-decoration-none text-dark product-link">
+                 <div class="card h-100">
                     <div class="bg-light d-flex justify-content-center align-items-center" style="height: 200px;">
-                        <span class="text-muted">Product Image</span>
+                        <span class="text-muted">Product Image</span> 
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Example Product {{ i + 1 }}</h5>
-                        <p class="card-text text-muted">Brief product description goes here.</p>
-                        <p class="card-text fw-bold">$24.99</p>
-                        <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        <p class="card-text fw-bold">${{ "%.2f"|format(product.price) }}</p>
+                        
+                        {% if product.rating and product.rating > 0 %}
+                        <p class="card-text">
+                            <small class="text-warning">
+                                {% for i in range(product.rating) %}★{% endfor %}{% for i in range(5 - product.rating) %}☆{% endfor %}
+                            </small>
+                            <small class="text-muted"> ({{ product.rating }})</small>
+                        </p>
+                        {% else %}
+                        <p class="card-text"><small class="text-muted">No rating</small></p>
+                        {% endif %}
+
+                        {% if product.freeShipping and product.sameDayDelivery %}
+                        <p class="card-text text-success small"><i class="fas fa-shipping-fast"></i> Free Same Day Delivery</p>
+                        {% elif product.freeShipping %}
+                        <p class="card-text text-success small"><i class="fas fa-shipping-fast"></i> Free Shipping</p>
+                        {% elif product.sameDayDelivery %}
+                        <p class="card-text text-info small"><i class="fas fa-clock"></i> Same Day Delivery</p>
+                        {% else %}
+                        <p class="card-text text-secondary small"><i class="fas fa-truck"></i> Standard Shipping</p>
+                        {% endif %}
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
                             <button class="btn btn-sm btn-primary">Add to Cart</button>
-                            <div>
-                                <small class="text-warning">★★★★☆</small>
-                            </div>
                         </div>
                     </div>
                 </div>
+                </a>
             </div>
             {% endfor %}
+            {% else %}
+            <div class="col">
+                <p>No products found. Please check the product data file or contact support.</p>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
-{{ super() }} {# Optional: Include scripts from base.html if needed #}
+{{ super() }}
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
+    const signInButton = document.getElementById('signInBtn'); 
+    const filterForm = document.getElementById('filterForm'); 
+    const productList = document.getElementById('productList');
 
-        const filterForm = document.getElementById('filterForm');
-        if (filterForm) {
-            filterForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                console.log('Applying filters...');
-                
+    const navbarForm = document.getElementById('navbarSearchForm')
+    const navbarInput = document.getElementById('navbarSearchInput')
+    
+    const productItems = productList ? Array.from(productList.getElementsByClassName('product-item')) : [];
 
-                const formData = new FormData(filterForm);
-                const filters = Object.fromEntries(formData.entries());
-                console.log('Filter values:', filters);
-                
-            });
-        }
+    if (filterForm) {
+        filterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('Applying filters via submit...');
+            applyFilters();
+        });
 
-        const signInButton = document.getElementById('signInBtn');
-        if (signInButton) {
-            // Initialize the popover
-            const popover = new bootstrap.Popover(signInButton, {
-                html: true, 
-                sanitize: false
-            });
-
-            if (!localStorage.getItem('signInPopoverDismissed')) {
-                popover.show();
+        filterForm.addEventListener('reset', function() {
+            console.log('Resetting filters...');
+            // Reset radio buttons to their default (e.g., "Any Rating")
+            const anyRatingRadio = document.getElementById('ratingAny');
+            if (anyRatingRadio) {
+                anyRatingRadio.checked = true;
             }
-            document.addEventListener('click', function(event) {
-            
-                const popoverElement = document.querySelector('.popover.signin-popover'); 
-                if (popoverElement && !signInButton.contains(event.target) && !popoverElement.contains(event.target)) {
-                    popover.hide();
-                    //localStorage.setItem('signInPopoverDismissed', 'true');
+            // After form reset, re-apply filters which should show all products
+            setTimeout(applyFilters, 0); // Timeout to allow form reset to propagate
+        });
+    }
+    if (navbarForm && navbarInput) {
+        navbarForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchTerm = navbarInput.value.toLowerCase();
+            console.log(`Searching for: ${searchTerm}`);
+            productItems.forEach(item => {
+                const itemTitle = item.querySelector('.card-title').textContent.toLowerCase();
+                if (itemTitle.includes(searchTerm)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
                 }
             });
-
-            
-             signInButton.addEventListener('click', function() {
-                 if (document.querySelector('.popover.signin-popover')) {
-                     popover.hide();
-                     localStorage.setItem('signInPopoverDismissed', 'true');
-                 }
-
-             });
+        });
+    }
+    function applyFilters() {
+        if (!productList) {
+            console.log('Product list not found');
+            return;
         }
-    });
+
+        const currentProductItems = Array.from(productList.getElementsByClassName('product-item'));
+        console.log(`Found ${currentProductItems.length} product items to filter.`);
+
+        const formData = new FormData(filterForm);
+
+        const selectedCategories = formData.getAll('category');
+        const minPriceInput = formData.get('minPrice');
+        const maxPriceInput = formData.get('maxPrice');
+        const minPrice = parseFloat(minPriceInput) || 0;
+        const maxPrice = parseFloat(maxPriceInput) || Infinity;
+        const minRating = parseInt(formData.get('minRating')) || 0; // Default to 0 if 'Any Rating' is selected and its value is 0
+        const freeShippingRequired = formData.get('freeShipping') === 'true';
+        const sameDayDeliveryRequired = formData.get('sameDayDelivery') === 'true';
+
+        console.log('Filters applied:', {
+            selectedCategories, minPrice, maxPrice, minRating, freeShippingRequired, sameDayDeliveryRequired
+        });
+
+        currentProductItems.forEach(item => {
+            const itemPrice = parseFloat(item.dataset.price);
+            const itemCategory = item.dataset.category;
+            const itemRating = parseInt(item.dataset.rating);
+            const itemFreeShipping = item.dataset.freeShipping === 'true';
+            const itemSameDay = item.dataset.sameDay === 'true';
+
+            let visible = true;
+
+            // Category filter
+            if (selectedCategories.length > 0 && !selectedCategories.includes(itemCategory)) {
+                visible = false;
+            }
+
+            // Price filter
+            if ((minPriceInput && itemPrice < minPrice) || (maxPriceInput && itemPrice > maxPrice)) {
+                visible = false;
+            }
+
+            // Rating filter
+            if (itemRating < minRating) { // Assumes product.rating is 0-5
+                visible = false;
+            }
+
+            // Shipping filters
+            if (freeShippingRequired && !itemFreeShipping) {
+                visible = false;
+            }
+            if (sameDayDeliveryRequired && !itemSameDay) {
+                visible = false;
+            }
+
+            item.style.display = visible ? '' : 'none';
+        });
+    }
+
+    if (signInButton) {
+        const popover = new bootstrap.Popover(signInButton, {
+            html: true,
+            sanitize: false
+
+        });
+
+        if (!localStorage.getItem('signInPopoverDismissed')) {
+        }
+
+        document.addEventListener('click', function(event) {
+            const popoverElement = document.querySelector('.popover.signin-popover');
+            if (popoverElement && !signInButton.contains(event.target) && !popoverElement.contains(event.target)) {
+
+            }
+        });
+
+        signInButton.addEventListener('click', function() {
+            // This logic might need refinement 
+            const popoverElement = document.querySelector('.popover.signin-popover');
+            if (popoverElement && popoverElement.classList.contains('show')) {
+                popover.hide();
+                localStorage.setItem('signInPopoverDismissed', 'true');
+            } else {
+                popover.show(); 
+                localStorage.removeItem('signInPopoverDismissed'); 
+            }
+        });
+    }
+});
 </script>
 {% endblock %}
