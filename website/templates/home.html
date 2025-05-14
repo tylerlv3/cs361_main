@@ -134,41 +134,45 @@
                  data-rating="{{ product.rating | default(0, true) }}"
                  data-free-shipping="{{ 'true' if product.freeShipping else 'false' }}"
                  data-same-day="{{ 'true' if product.sameDayDelivery else 'false' }}">
-                <a href="{{ url_for('views.product', productID=product.id) }}" class="text-decoration-none text-dark product-link">
-                 <div class="card h-100">
-                    <div class="bg-light d-flex justify-content-center align-items-center" style="height: 200px;">
-                        <span class="text-muted">Product Image</span> 
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ product.title }}</h5>
-                        <p class="card-text fw-bold">${{ "%.2f"|format(product.price) }}</p>
-                        
-                        {% if product.rating and product.rating > 0 %}
-                        <p class="card-text">
-                            <small class="text-warning">
-                                {% for i in range(product.rating) %}★{% endfor %}{% for i in range(5 - product.rating) %}☆{% endfor %}
-                            </small>
-                            <small class="text-muted"> ({{ product.rating }})</small>
-                        </p>
-                        {% else %}
-                        <p class="card-text"><small class="text-muted">No rating</small></p>
-                        {% endif %}
-
-                        {% if product.freeShipping and product.sameDayDelivery %}
-                        <p class="card-text text-success small"><i class="fas fa-shipping-fast"></i> Free Same Day Delivery</p>
-                        {% elif product.freeShipping %}
-                        <p class="card-text text-success small"><i class="fas fa-shipping-fast"></i> Free Shipping</p>
-                        {% elif product.sameDayDelivery %}
-                        <p class="card-text text-info small"><i class="fas fa-clock"></i> Same Day Delivery</p>
-                        {% else %}
-                        <p class="card-text text-secondary small"><i class="fas fa-truck"></i> Standard Shipping</p>
-                        {% endif %}
-                        <div class="d-flex justify-content-between align-items-center mt-auto">
-                            <button class="btn btn-sm btn-primary">Add to Cart</button>
+                <div class="card h-100">
+                    <a href="{{ url_for('views.product', productID=product.id) }}" class="text-decoration-none">
+                        <div class="bg-light d-flex justify-content-center align-items-center" style="height: 200px;">
+                            <span class="text-muted">Product Image</span> 
                         </div>
+                        <div class="card-body">
+                            <h5 class="card-title text-body">{{ product.title }}</h5>
+                            <p class="card-text fw-bold text-body">${{ "%.2f"|format(product.price) }}</p>
+                            
+                            {% if product.rating and product.rating > 0 %}
+                            <p class="card-text">
+                                <small class="text-warning">
+                                    {% for i in range(product.rating) %}★{% endfor %}{% for i in range(5 - product.rating) %}☆{% endfor %}
+                                </small>
+                                <small class="text-muted"> ({{ product.rating }})</small>
+                            </p>
+                            {% else %}
+                            <p class="card-text"><small class="text-muted">No rating</small></p>
+                            {% endif %}
+
+                            {% if product.freeShipping and product.sameDayDelivery %}
+                            <p class="card-text text-success small"><i class="fas fa-shipping-fast"></i> Free Same Day Delivery</p>
+                            {% elif product.freeShipping %}
+                            <p class="card-text text-success small"><i class="fas fa-shipping-fast"></i> Free Shipping</p>
+                            {% elif product.sameDayDelivery %}
+                            <p class="card-text text-info small"><i class="fas fa-clock"></i> Same Day Delivery</p>
+                            {% else %}
+                            <p class="card-text text-secondary small"><i class="fas fa-truck"></i> Standard Shipping</p>
+                            {% endif %}
+                        </div>
+                    </a>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <form action="{{ url_for('views.add_to_cart', product_id=product.id) }}" method="POST">
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </button>
+                        </form>
                     </div>
                 </div>
-                </a>
             </div>
             {% endfor %}
             {% else %}

@@ -30,6 +30,16 @@
                 <button id="themeToggle" class="btn btn-outline-light me-2" type="button">
                     <i class="fas fa-adjust"></i>
                 </button>
+                <div style="margin-right: 20px; margin-left: 20px;">
+                    <a class="nav-link position-relative" href="#">
+                        <i class="fas fa-shopping-cart"></i>
+                        {% if session.get('cart') %}
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {{ session.get('cart')|length }}
+                        </span>
+                        {% endif %}
+                    </a>
+                </div>
                 {% if is_logged_in %}
                     <div class="d-flex align-items-center">
                         <span class="text-light me-2">Hi, {{ name }}</span>
@@ -43,7 +53,7 @@
                             data-bs-placement="bottom"
                             data-bs-trigger="manual"
                             data-bs-custom-class="signin-popover"
-                            data-bs-content="Create an account or sign in to save orders to history.">
+                            data-bs-content="Create a free account or sign in to save orders to history.">
                         <a href="/userInit" class="nav-link text-light">Sign In</a>
                     </button>
                 {% endif %}
@@ -73,7 +83,6 @@
                         <i class="fas fa-cog me-2"></i>Account Settings
                     </a>
                 </li>
-                <!-- maybe more menu items -->
             </ul>
         </div>
     </div>

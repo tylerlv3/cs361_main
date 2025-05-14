@@ -62,9 +62,11 @@
                     <input type="number" id="quantity" name="quantity" class="form-control" value="1" min="1">
                 </div>
                 <div class="col-md-8">
-                    <button class="btn btn-primary btn-lg w-100">
-                        <i class="fas fa-shopping-cart"></i> Add to Cart
-                    </button>
+                    <form action="{{ url_for('views.add_to_cart', product_id=product.id) }}" method="POST">
+                        <button type="submit" class="btn btn-primary btn-lg w-100">
+                            <i class="fas fa-cart-plus"></i> Add to Cart
+                        </button>
+                    </form>
                 </div>
             </div>
             

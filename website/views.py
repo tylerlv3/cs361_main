@@ -244,3 +244,28 @@ def product(productID):
         flash('Products file not found.', 'error')
     
     return render_template('productPage.html', product=product)
+
+@views.route('/add-to-cart/<int:product_id>', methods=['POST'])
+def add_to_cart(product_id):
+    if 'cart' not in session:
+        session['cart'] = []
+    
+    # Get product details from your database
+    # For now, we'll just store the product ID
+    if product_id not in session['cart']:
+        session['cart'].append(product_id)
+        session.modified = True
+        flash('Item added to cart!', 'success')
+    else:
+        flash('Item is already in cart!', 'info')
+    
+    return redirect(request.referrer or url_for('views.home'))
+
+@views.route('/remove-from-cart/<int:product_id>', methods=['POST'])
+def remove_from_cart(product_id):
+    if 'cart' in session and product_id in session['cart']:
+        session['cart'].remove(product_id)
+        session.modified = True
+        flash('Item removed from cart!', 'success')
+    
+    return redirect(request.referrer or url_for('views.home'))
